@@ -4,6 +4,8 @@ const session = require("express-session");
 const mongoose = require("mongoose");
 const cors = require("cors");
 
+require("dotenv").config();
+
 const User = require("./models/User");
 const authRoutes = require("./routes/auth");
 
@@ -37,9 +39,7 @@ app.use("/auth", authRoutes);
 
 // Connect to MongoDB
 mongoose
-  .connect(
-    "mongodb+srv://virajchavan308:VIRAJCHAVAN308@cluster0.alahqxc.mongodb.net/kanji_dictionary?retryWrites=true&w=majority&appName=Cluster0"
-  )
+  .connect(process.env.MONGODB_URI)
   .then(() => console.log("MongoDB connected"))
   .catch((err) => console.error("MongoDB connection error:", err));
 
